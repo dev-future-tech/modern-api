@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: modern-api
+spec:
+  selector:
+    matchLabels:
+      app: modern-api
+  template:
+    metadata:
+      labels:
+        app: modern-api
+    spec:
+      containers:
+      - name: modern-api
+        image: anthonyikeda/modern-api
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+
