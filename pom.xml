@@ -17,7 +17,10 @@
 		<url>https://github.com/dev-future-tech/modern-api.git</url>
 		<developerConnection>scm:git:https://github.com/dev-future-tech/modern-api.git</developerConnection>
 	  	<tag>HEAD</tag>
-  </scm>
+    </scm>
+
+	<packaging>jar</packaging>
+
 
 	<properties>
 		<java.version>23</java.version>
@@ -76,4 +79,11 @@
 		</plugins>
 	</build>
 
+	<distributionManagement>
+		<repository>
+		<id>github</id>
+		<name>GitHub Public</name>
+		<url>https://maven.pkg.github.com/dev-future-tech/modern-api</url>
+	</repository>
+	</distributionManagement>
 </project>
