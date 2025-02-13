@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: modern-api-service
+spec:
+  selector:
+    app: modern-api
+  ports:
+  - port: 18080
+    targetPort: 8080
