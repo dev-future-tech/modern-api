@@ -14,8 +14,9 @@
 	<description>RESTful web application</description>
 
 	<scm>
+		<url>https://github.com/dev-future-tech/modern-api.git</url>
 		<developerConnection>scm:git:https://github.com/dev-future-tech/modern-api.git</developerConnection>
-	  <tag>HEAD</tag>
+	  	<tag>HEAD</tag>
   </scm>
 
 	<properties>
