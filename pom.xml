@@ -9,14 +9,14 @@
 	</parent>
 	<groupId>com.example</groupId>
 	<artifactId>modern-api</artifactId>
-	<version>0.0.3-SNAPSHOT</version>
+	<version>0.0.3</version>
 	<name>modern-api</name>
 	<description>RESTful web application</description>
 
 	<scm>
 		<url>https://github.com/dev-future-tech/modern-api.git</url>
 		<developerConnection>scm:git:https://github.com/dev-future-tech/modern-api.git</developerConnection>
-	  	<tag>HEAD</tag>
+	  	<tag>modern-api-0.0.3</tag>
     </scm>
 
 	<packaging>jar</packaging>
