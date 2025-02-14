@@ -20,4 +20,9 @@ spec:
             cpu: "500m"
         ports:
         - containerPort: 8080
+        livenessProbe:
+          httpGet:
+          path: /actuator/health/liveness
+          initalDelaySeconds: 3
+          periodSeconds: 3
 
