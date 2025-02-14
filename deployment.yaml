@@ -16,7 +16,7 @@ spec:
         image: anthonyikeda/modern-api
         resources:
           limits:
-            memory: "128Mi"
+            memory: "256Mi"
             cpu: "500m"
         ports:
         - containerPort: 8080
@@ -24,6 +24,7 @@ spec:
           httpGet:
             path: /actuator/health/liveness
             port: 8080
-            initalDelaySeconds: 3
-            periodSeconds: 3
+          initialDelaySeconds: 30
+          periodSeconds: 60
+
 
