@@ -32,7 +32,7 @@ public class GreetingService {
     }
 
     public Greeting getGreetingById(Long greetingId) {
-        return template.queryForObject("select greeting_id, greeting from greeting where greeting_id = ?",
+        return template.queryForObject("select greeting_id, greeting from greetings where greeting_id = ?",
                 (rs, rowNum) -> {
                     Greeting greeting = new Greeting(rs.getLong("greeting_id"), rs.getString("greeting"));
                     return greeting;

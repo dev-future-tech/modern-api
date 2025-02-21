@@ -6,5 +6,5 @@ spec:
   selector:
     app: modern-api
   ports:
-  - port: 18080
+  - port: 8080
     targetPort: 8080

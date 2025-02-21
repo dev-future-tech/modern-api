@@ -17,7 +17,7 @@ spec:
         imagePullPolicy: IfNotPresent
         env:
           - name: SPRING_DATASOURCE_URL
-            value: jdbc:postgresql://my-release-postgresql.default:5432/modern_dbs
+            value: jdbc:postgresql://my-release-postgresql.default:5432/modern_db
         resources:
           limits:
             memory: "512Mi"
