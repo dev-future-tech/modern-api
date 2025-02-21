@@ -7,3 +7,5 @@ create table greetings (
     greeting varchar(120),
     constraint pk_greeting primary key(greeting_id)
 );
+
+insert into greetings(greeting) values('Hello, World!');

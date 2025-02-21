@@ -1,19 +1,19 @@
 package com.example.restservice.greeting;
 
-import org.springframework.jdbc.core.PreparedStatementCreator;
-import org.springframework.jdbc.core.RowMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.Types;
+import java.util.List;
 
 @Component
 public class GreetingService {
+    private final Logger LOG = LoggerFactory.getLogger(GreetingService.class);
 
     JdbcTemplate template;
 
@@ -37,5 +37,17 @@ public class GreetingService {
                     Greeting greeting = new Greeting(rs.getLong("greeting_id"), rs.getString("greeting"));
                     return greeting;
                 }, greetingId);
+    }
+
+    public List<Greeting> getGreetings(int offset, int limit) {
+        LOG.debug("Getting {} greetings from offset {}", limit, offset);
+
+        return template.query("select greeting_id, greeting from greetings limit ? offset ?",
+                new Object[]{limit, offset},
+                new int[] {Types.BIGINT, Types.BIGINT},
+                (rs, row) -> {
+                    Greeting greeting = new Greeting(rs.getLong("greeting_id"), rs.getString("greeting"));
+                    return greeting;
+                });
     }
 }

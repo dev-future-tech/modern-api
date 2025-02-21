@@ -25,9 +25,8 @@ public class GreetingController {
 
     @GetMapping("/greeting")
     public ResponseEntity<List<Greeting>> getGreeting() {
-        Greeting[] toReturn = new Greeting[1];
-        toReturn[0] = new Greeting(1L, "Hello, World!");
-        return ResponseEntity.ok(Arrays.asList(toReturn));
+        List<Greeting> greetings = service.getGreetings(0, 10);
+        return ResponseEntity.ok(greetings);
     }
 
     @GetMapping("/greeting/{greetingId}")
