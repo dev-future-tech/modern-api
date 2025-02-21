@@ -13,18 +13,25 @@ spec:
     spec:
       containers:
       - name: modern-api
-        image: anthonyikeda/modern-api
+        image: anthonyikeda/modern-api:0.0.4-SNAPSHOT
+        env:
+          - name: SPRING_DATASOURCE_URL
+            value: jdbc:postgresql://my-release-postgresql.default:5432/modern_dbs
         resources:
           limits:
+            memory: "512Mi"
+            cpu: "2"
+          requests:
+            cpu: "0.1"
             memory: "256Mi"
-            cpu: "500m"
         ports:
         - containerPort: 8080
         livenessProbe:
           httpGet:
             path: /actuator/health/liveness
             port: 8080
-          initialDelaySeconds: 30
+            scheme: HTTP
+          initialDelaySeconds: 130
           periodSeconds: 60
 
 

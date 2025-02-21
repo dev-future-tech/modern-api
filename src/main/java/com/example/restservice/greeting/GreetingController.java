@@ -1,25 +1,50 @@
 package com.example.restservice.greeting;
 
+import java.net.URI;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+import jakarta.websocket.server.PathParam;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class GreetingController {
 
-	private final Logger LOG = LoggerFactory.getLogger(GreetingController.class);
-	private static final String template = "Hello, %s!";
-	private final AtomicLong counter = new AtomicLong();
+    private final Logger LOG = LoggerFactory.getLogger(GreetingController.class);
+    private static final String template = "Hello, %s!";
+    private final AtomicLong counter = new AtomicLong();
+    private final GreetingService service;
 
-	@GetMapping("/greeting")
-	public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
+    public GreetingController(GreetingService greetingService) {
+        this.service = greetingService;
+    }
 
-		LOG.debug("Incoming Greeting {}", name);
+    @GetMapping("/greeting")
+    public ResponseEntity<List<Greeting>> getGreeting() {
+        Greeting[] toReturn = new Greeting[1];
+        toReturn[0] = new Greeting(1L, "Hello, World!");
+        return ResponseEntity.ok(Arrays.asList(toReturn));
+    }
 
-		return new Greeting(counter.incrementAndGet(), String.format(template, name));
-	}
+    @GetMapping("/greeting/{greetingId}")
+    public Greeting greeting(@PathVariable(value = "greetingId") Long greetingId) {
+
+        LOG.debug("Incoming Greeting Id {}", greetingId);
+
+        Greeting greeting = this.service.getGreetingById(greetingId);
+        return greeting;
+    }
+
+    @PostMapping("/greeting")
+    public ResponseEntity<Void> createGreeting(@RequestParam(value = "greeting") String greeting) {
+        LOG.debug("Incoming Greeting {}", greeting);
+
+        long greetingId = this.service.saveGreeting(greeting);
+
+        return ResponseEntity.created(URI.create(String.format("/greeting/%d", greetingId))).build();
+    }
 }
